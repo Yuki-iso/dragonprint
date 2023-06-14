@@ -1,0 +1,27 @@
+3 modes, fit, regular and fill
+
+multiline input:
+	every line will be handled as new
+
+line input, check length, if fit within 1 line do that (leaving minimal space on both sides)
+
+if not, do regular, which does what it do now
+	cuts at spaces, but a good whitespace before and after
+BUT check if last line in regular can be put on the one before it 
+	if it can, do that, by applying the fit rules to all lines before it
+		so using fit on more lines is fill!
+		
+^^^
+
+when you need a newline, put it as a seperate sting, it will be handled as a new input
+	meaning that the top can be FIT, but the newline can be regular, or something
+
+
+create input file for this, every line is a new input, every string defined with ""
+	want a newline in the msg? these 2 are 2 sperate strings, but on the same line
+		ex oneline: "this is a oneliner";
+		ex multiline: "this is a multiline", "I am on a new line", "I am on a newer line";
+		both are on the same line (,'s and ;'s might be different)
+		
+maybe create a file with formatted strings, that have the correct whitespaces before and after, so can just print without calc (faster)
+	live file with raw input to be formatted (using above rules (fit regular and fill))
