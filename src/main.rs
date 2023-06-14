@@ -49,7 +49,7 @@ fn generateString() -> &'static str {
     options.push("The bar was so low it was practically an tripping hazard in hell, yet here you are, limbo dancing with the devil.");
     options.push("Whenever I collapse is purely up to the gods.");
     options.push("This makes me want to throw a flashbang into a room with epileptic kids."); 
-    options.push("Congratulations, you've won yourslef a mandatory trip to our euthanisia center.");
+    options.push("Congratulations, you've won yourself a mandatory trip to our euthanasia center.");
     return options[rng.gen_range(0..options.len())];
 }
 
