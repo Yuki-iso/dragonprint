@@ -1,13 +1,30 @@
 // use substring::Substring;
-
+use std::env;
+use rand::seq::SliceRandom;
+use home::home_dir;
 
 fn main() {
+    let args: Vec<String> = env::args().collect();
+    // dbg!(args);
+   
+        if args.len() > 1 { 
+        let query = &args[1];
+        let prompt = &args[2];
+        if query == "-scroll" {sayy(prompt.to_string())}
+        else {sayy("".to_string());}}
+    else {sayy("".to_string())}
+    // let input = &args[2];
+
+    
     // println!("|￣￣￣￣￣￣￣￣￣￣|\n| GOD MAY JUDGE YOU, |\n|   BUT HIS SINS     |\n| OUTNUMBER YOUR OWN |\n|＿＿＿＿＿＿＿＿＿＿|\n(\\__/) ||\n(•ㅅ•) || \n/ 　  づ\n");
     // println!("{}", say);
-    sayy();
+
+     
+    
+    // read();
 }
 
-fn sayy() {
+fn sayy(mut inp: String) {
     let dragontop = r"                                  /   \
                           )      ((   ))     (
 (@)                      /|\      ))_((     /|\
@@ -28,29 +45,33 @@ fn sayy() {
     println!("{}", dragontop);
     //
     // println!("{}, {}", generateString(), &generateString()[1..8]);
-    let text = formatString(generateString().to_string());
+    let mut text = Vec::<String>::new();
+    if inp != "" {
+        text = formatString(inp);
+    } else {
+        text = formatString(generateString().to_string());
+    }
+
+    let finalstr = String::new;
+    if text.len() == 1 {
+        finalstr = signpre.to_string() + &" ".repeat(29 - (text[0].len() / 2))[..];
+    }
     for item in text {
         let signpost = " ".repeat(62 - item.len());
         println!("{}{}{}| |",signpre, item, signpost);
     }
 
-    println!("{}", dragonbot)
+    println!("{}", dragonbot);
 }
-use rand::Rng;
-fn generateString() -> &'static str {
-    let mut options: Vec<&str> = vec![];
-    let mut rng = rand::thread_rng();
-    options.push("GOD MAY JUDGE YOU, BUT HIS SINS OUTNUMBER YOUR OWN");
-    options.push("You know, it's funny... when you look at someone through rose-colored glasses, all the red flags just look like flags.");
-    options.push("I've got good news. You see, there's no need to wonder where your god is, 'cause he's right here! And he's fresh out of mercy.");
-    options.push("I commend my soul to any god that can find it.");
-    options.push("If you feel like the dumbest person in the room, then you are in the right room.");
-    options.push("Oh I believe in God, alright. I just don't believe the bastard deserves to be worshipped.");
-    options.push("The bar was so low it was practically an tripping hazard in hell, yet here you are, limbo dancing with the devil.");
-    options.push("Whenever I collapse is purely up to the gods.");
-    options.push("This makes me want to throw a flashbang into a room with epileptic kids."); 
-    options.push("Congratulations, you've won yourself a mandatory trip to our euthanasia center.");
-    return options[rng.gen_range(0..options.len())];
+// extern crate random;
+
+fn generateString() -> String {
+    let home = home_dir().expect("READON").into_os_string().into_string().unwrap();
+    // println!("{}", home);
+    let options = lines_from_file(home + "/lines");
+    // let mut rng = rand::thread_rng();
+    let pick = options.choose(&mut rand::thread_rng()).unwrap();
+    return pick.to_string()
 }
 
 fn formatString(mut input: String) -> Vec<String> {
@@ -73,3 +94,20 @@ fn formatString(mut input: String) -> Vec<String> {
 //if not, do char - 1, if that is a whitespace, cut the string left of char and append to list
 //restart on cut string, and char 60
 }
+
+
+use std::{
+    fs::File,
+    io::{prelude::*, BufReader},
+    path::Path,
+};
+
+fn lines_from_file(filename: impl AsRef<Path>) -> Vec<String> {
+    let file = File::open(filename).expect("no such file (please put it in home)");
+    let buf = BufReader::new(file);
+    buf.lines()
+        .map(|l| l.expect("Could not parse line"))
+        .collect()
+}
+
+
