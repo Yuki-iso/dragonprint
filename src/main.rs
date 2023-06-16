@@ -41,7 +41,7 @@ fn sayy(mut inp: String) {
                                    _) )_ 
                                    `\ /'
 ";
-    let signpre = r"| |     ";
+    let mut signpre = r"| |     ";
     println!("{}", dragontop);
     //
     // println!("{}, {}", generateString(), &generateString()[1..8]);
@@ -52,9 +52,12 @@ fn sayy(mut inp: String) {
         text = formatString(generateString().to_string());
     }
 
-    let finalstr = String::new;
+    let mut finalstr = String::from("Hello, world!");
     if text.len() == 1 {
-        finalstr = signpre.to_string() + &" ".repeat(29 - (text[0].len() / 2))[..];
+        let v = text[0].len() as f32 / 2.0;
+        text[0] = r" ".repeat(28 - v.floor() as usize) + &text[0][..];
+        // signpre = &finalstr[..];
+        // println!("{}", finalstr)
     }
     for item in text {
         let signpost = " ".repeat(62 - item.len());
