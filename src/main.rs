@@ -3,9 +3,15 @@ use std::env;
 use rand::seq::SliceRandom;
 use home::home_dir;
 
+// let mut Some 
 fn main() {
     let args: Vec<String> = env::args().collect();
     // dbg!(args);
+    if let Some((w, h)) = term_size::dimensions() {
+        // print_type_of(&w);
+        println!("TODO!:\nThis window has a Width of {}\nuse this to center le dragon :3", w);    
+    }
+        
    
         if args.len() > 1 { 
         let query = &args[1];
@@ -22,6 +28,10 @@ fn main() {
      
     
     // read();
+}
+
+fn print_type_of<T>(_: &T) {
+    println!("{}", std::any::type_name::<T>())
 }
 
 fn sayy(mut inp: String) {
